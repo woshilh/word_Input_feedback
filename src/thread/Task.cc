@@ -1,12 +1,9 @@
 #include "Task.h"
+#include "countBytes.h"
 #include <iostream>
 #include <set>
 #include <algorithm>
 
-size_t countBytes(std::string ch)
-{
-    return 1;
-}
 
 Task::Task(std::string str,int fd,Diction & dic)
 :str_(str)

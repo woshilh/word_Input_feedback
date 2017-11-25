@@ -1,6 +1,8 @@
 #include "Diction.h"
+#include "countBytes.h"
+#include <iostream>
 
-Diction::pInstance_ = NULL;
+Diction *Diction::pInstance_ = NULL;
 
 Diction * Diction::createInstance(const char *filepath1,const char *filepath2)
 {
@@ -9,6 +11,21 @@ Diction * Diction::createInstance(const char *filepath1,const char *filepath2)
         pInstance_ = new Diction(filepath1,filepath2); 
     }
     return pInstance_;
+}
+
+void Diction::show_dic()
+{
+    for(size_t idx=0;idx != dic_.size();++idx)
+    {
+        std::cout << dic_[idx].first
+            << " -->> " << dic_[idx].second
+            << std::endl;
+    }
+}
+
+void Diction::show_index()
+{
+
 }
 
 void Diction::read_from(const char* filepath)
@@ -33,7 +50,14 @@ void Diction::read_from(const char* filepath)
 
 void Diction::create_index(int idx)
 {
-
+    std::string word = dic_[idx].first;
+    for(size_t idx = 0;idx < word.size();++idx)
+    {
+        size_t nbyte = countBytes(const char ch);
+        std::string key = word.substr(idx,nbyte);
+        idx += nbyte - 1;
+        index_tab_[key].inster(idx);
+    }
 }
 Diction::Diction(const char *filepath1,const char *filepath2)
 {
